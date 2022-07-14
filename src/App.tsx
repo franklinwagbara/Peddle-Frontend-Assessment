@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Navigate, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import "./App.css";
+import Header from "./layouts/Header";
+import Footer from "./layouts/Footer";
+import Homepage from "./containers/Homepage";
+import Aboutpage from "./containers/Aboutpage";
+import Blogpage from "./containers/Blogpage";
+import { theme } from "./global-styles";
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header />
+      <Routes>
+        <Route path="/comingsoon" element={<Homepage />} />
+        <Route path="/about" element={<Aboutpage />} />
+        <Route path="/blog" element={<Blogpage />} />
+        <Route path="*" element={<Navigate to="/comingsoon" replace />} />
+      </Routes>
+      <Footer />
+    </ThemeProvider>
   );
 }
 
